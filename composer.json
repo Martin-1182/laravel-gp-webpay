@@ -16,9 +16,12 @@
         }
     ],
     "require": {
-        "php": "^8.4",
-        "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^10.0||^11.0"
+        "php": ">=8.0",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "illuminate/contracts": "^10.0||^11.0",
+        "spatie/array-to-xml": "^3.4",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
