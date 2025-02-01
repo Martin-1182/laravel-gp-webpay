@@ -9,25 +9,22 @@ use Codehub\Gpwebpay\Enums\PaymentMethod;
 
 class PaymentRequest
 {
-    private array $params = [];
+    private array $params;
 
     public function __construct(
-        private int $orderNumber,
-        private float $amount,
-        private Currency $currency,
-        private int $depositFlag,
-        private string $url,
-        private ?string $merOrderNumber = null,
-        private ?string $md = null,
-        private ?AddInfo $addInfo = null,
-        private PaymentMethod $paymentMethod = PaymentMethod::PAYMENT_CARD
+        private readonly int $orderNumber,
+        private readonly float $amount,
+        private readonly Currency $currency,
+        private readonly int $depositFlag,
+        private readonly string $url,
+        private readonly PaymentMethod $paymentMethod = PaymentMethod::PAYMENT_CARD
     ) {
-        $this->initializeParams();
+        $this->params = $this->initializeBaseParams();
     }
 
-    private function initializeParams(): void
+    private function initializeBaseParams(): array
     {
-        $this->params = [
+        return [
             'MERCHANTNUMBER' => '',
             'OPERATION' => 'CREATE_ORDER',
             'ORDERNUMBER' => $this->orderNumber,
@@ -37,18 +34,6 @@ class PaymentRequest
             'URL' => $this->url,
             'PAYMETHOD' => $this->paymentMethod->value,
         ];
-
-        if ($this->merOrderNumber) {
-            $this->params['MERORDERNUM'] = $this->merOrderNumber;
-        }
-
-        if ($this->md) {
-            $this->params['MD'] = $this->md;
-        }
-
-        if ($this->addInfo) {
-            $this->params['ADDINFO'] = $this->addInfo->toXml();
-        }
     }
 
     public function setDigest(string $digest): void
@@ -61,29 +46,8 @@ class PaymentRequest
         $this->params['MERCHANTNUMBER'] = $merchantNumber;
     }
 
-    public function setDescription(string $description): void
+    public function toArray(): array
     {
-        $this->params['DESCRIPTION'] = $description;
-    }
-
-    public function setLang(string $lang): void
-    {
-        $this->params['LANG'] = $lang;
-    }
-
-    public function getSignParams(): array
-    {
-        $filterOutParams = ['LANG'];
-
-        return array_filter(
-            $this->params,
-            fn (string $key) => ! in_array($key, $filterOutParams, true),
-            ARRAY_FILTER_USE_KEY
-        );
-    }
-
-    public function setParam(string $key, string $value): void
-    {
-        $this->params[$key] = $value;
+        return $this->params;
     }
 }

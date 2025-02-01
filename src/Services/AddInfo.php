@@ -10,8 +10,12 @@ use Spatie\ArrayToXml\ArrayToXml;
 
 class AddInfo
 {
-    public function __construct(private string $schema, private array $values)
-    {
+    private const NAMESPACE = 'http://gpe.cz/gpwebpay/additionalInfo/request';
+
+    public function __construct(
+        private readonly string $schema,
+        private readonly array $values
+    ) {
         $this->validate();
     }
 
@@ -22,12 +26,8 @@ class AddInfo
 
         libxml_use_internal_errors(true);
         if (! $dom->schemaValidateSource($this->schema)) {
-            $errors = [];
-            foreach (libxml_get_errors() as $xmlError) {
-                $errors[] = $xmlError->message;
-            }
-
-            throw new AddInfoException('Validation errors: '.implode(' | ', $errors));
+            $errors = array_map(fn ($error) => $error->message, libxml_get_errors());
+            throw new AddInfoException('Validation errors: '.implode('|', $errors));
         }
         libxml_use_internal_errors(false);
     }
@@ -38,18 +38,9 @@ class AddInfo
             $this->values, [
                 'rootElementName' => 'additionalInfoRequest',
                 '_attributes' => [
-                    'xmlns' => 'http://gpe.cz/gpwebpay/additionalInfo/request',
+                    'xmlns' => self::NAMESPACE,
                 ],
             ]
         ));
-    }
-
-    public static function createMinimalValues(string $version = '5.0'): array
-    {
-        return [
-            '_attributes' => [
-                'version' => $version,
-            ],
-        ];
     }
 }

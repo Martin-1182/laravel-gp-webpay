@@ -4,106 +4,48 @@ declare(strict_types=1);
 
 namespace Codehub\Gpwebpay\Services;
 
+use Codehub\Gpwebpay\Services\Contracts\KeyLoaderInterface;
+use Codehub\Gpwebpay\Services\Exceptions\SignerException;
+
 class Signer
 {
-    /** @var string */
-    private $privateKey;
-
-    /** @var resource */
-    private $privateKeyResource;
-
-    /** @var string */
-    private $privateKeyPassword;
-
-    /** @var string */
-    private $publicKey;
-
-    /** @var resource */
-    private $publicKeyResource;
-
-    public function __construct(string $privateKey, string $privateKeyPassword, string $publicKey)
-    {
-        if (! file_exists($privateKey) || ! is_readable($privateKey)) {
-            throw new SignerException("Private key ({$privateKey}) not exists or not readable!");
-        }
-
-        if (! file_exists($publicKey) || ! is_readable($publicKey)) {
-            throw new SignerException("Public key ({$publicKey}) not exists or not readable!");
-        }
-
-        $this->privateKey = $privateKey;
-        $this->privateKeyPassword = $privateKeyPassword;
-        $this->publicKey = $publicKey;
-    }
+    public function __construct(
+        private readonly KeyLoaderInterface $keyLoader
+    ) {}
 
     /**
-     * @return resource
-     *
      * @throws SignerException
      */
-    private function getPrivateKeyResource()
-    {
-        if ($this->privateKeyResource) {
-            return $this->privateKeyResource;
-        }
-
-        $key = file_get_contents($this->privateKey);
-
-        if (! ($this->privateKeyResource = openssl_pkey_get_private($key, $this->privateKeyPassword))) {
-            throw new SignerException("'{$this->privateKey}' is not valid PEM private key (or passphrase is incorrect).");
-        }
-
-        return $this->privateKeyResource;
-    }
-
     public function sign(array $params): string
     {
-        $digestText = implode('|', $params);
-        openssl_sign($digestText, $digest, $this->getPrivateKeyResource());
-        $digest = base64_encode($digest);
+        $data = $this->createSignedData($params);
 
-        return $digest;
+        $privateKeyResource = $this->keyLoader->getPrivateKey();
+        if (! openssl_sign($data, $signature, $privateKeyResource)) {
+            throw new SignerException('Failed to sign data.');
+        }
+
+        return base64_encode($signature);
     }
 
     /**
-     * @param  string  $digest
-     * @return bool
-     *
      * @throws SignerException
      */
-    public function verify(array $params, $digest)
+    public function verify(array $params, string $digest): bool
     {
-        $data = implode('|', $params);
-        $digest = base64_decode($digest);
+        $data = $this->createSignedData($params);
+        $publicKeyResource = $this->keyLoader->getPublicKey();
 
-        $ok = openssl_verify($data, $digest, $this->getPublicKeyResource());
-
-        if ($ok !== 1) {
-            throw new SignerException('Digest is not correct!');
+        $result = openssl_verify($data, base64_decode($digest), $publicKeyResource);
+        if ($result !== 1) {
+            throw new SignerException('Verification failed.');
         }
 
         return true;
     }
 
-    /**
-     * @return resource
-     *
-     * @throws SignerException
-     */
-    private function getPublicKeyResource()
+    private function createSignedData(array $params): string
     {
-        if ($this->publicKeyResource) {
-            return $this->publicKeyResource;
-        }
-
-        $fp = fopen($this->publicKey, 'r');
-        $key = fread($fp, filesize($this->publicKey));
-        fclose($fp);
-
-        if (! ($this->publicKeyResource = openssl_pkey_get_public($key))) {
-            throw new SignerException("'{$this->publicKey}' is not valid PEM public key.");
-        }
-
-        return $this->publicKeyResource;
+        return implode('|', $params);
     }
 }
