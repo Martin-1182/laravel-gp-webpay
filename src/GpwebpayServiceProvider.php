@@ -6,7 +6,6 @@ namespace Codehub\Gpwebpay;
 
 use Codehub\Gpwebpay\Commands\GpwebpayCommand;
 use Codehub\Gpwebpay\Services\FileKeyLoader;
-use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
