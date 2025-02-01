@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Websystem\Gpwebpay\Services;
 
+use OpenSSLAsymmetricKey;
 use Websystem\Gpwebpay\Services\Contracts\KeyLoaderInterface;
 use Websystem\Gpwebpay\Services\Exceptions\SignerException;
-use OpenSSLAsymmetricKey;
 
 class FileKeyLoader implements KeyLoaderInterface
 {

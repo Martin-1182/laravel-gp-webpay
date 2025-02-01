@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Websystem\Gpwebpay\Services;
 
-use Websystem\Gpwebpay\Services\Exceptions\AddInfoException;
 use DOMDocument;
 use Spatie\ArrayToXml\ArrayToXml;
+use Websystem\Gpwebpay\Services\Exceptions\AddInfoException;
 
 class AddInfo
 {
