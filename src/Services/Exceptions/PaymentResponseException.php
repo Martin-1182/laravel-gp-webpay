@@ -9,6 +9,7 @@ use Exception;
 class PaymentResponseException extends Exception
 {
     private int $prCode;
+
     private int $srCode;
 
     public function __construct(
