@@ -44,7 +44,10 @@ jobs:
           elif [[ "${{ matrix.laravel }}" == "10.*" ]]; then
             composer require "orchestra/canvas:^8.0" --dev --no-interaction --no-update
           fi
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
+
+          composer require "laravel/framework:${{ matrix.laravel }}" \
+                          "orchestra/testbench:${{ matrix.testbench }}" \
+                          "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies
