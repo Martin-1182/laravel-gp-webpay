@@ -17,7 +17,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: [8.4, 8.3, 8.2, 8.1]
+        php: [8.4, 8.3, 8.2, 8.1] # Bez 8.0
         laravel: [11.*, 10.*]
         stability: [prefer-lowest, prefer-stable]
         include:
@@ -41,17 +41,12 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
-      - name: Setup problem matchers
-        run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
       - name: Install dependencies
         run: |
           if [[ "${{ matrix.laravel }}" == "11.*" ]]; then
-            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest-plugin-laravel:^3.0" "nesbot/carbon:${{ matrix.os == 'windows-latest' && '^^^' || '' }}${{ matrix.carbon }}" --no-interaction --no-update
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest:^3.0" "pestphp/pest-plugin-laravel:^3.0" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           else
-            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest-plugin-laravel:^2.0" "nesbot/carbon:${{ matrix.os == 'windows-latest' && '^^^' || '' }}${{ matrix.carbon }}" --no-interaction --no-update
+            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "pestphp/pest:^2.0" "pestphp/pest-plugin-laravel:^2.0" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           fi
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
