@@ -7,7 +7,9 @@ namespace Codehub\Gpwebpay\Services;
 class PaymentResponse
 {
     private array $params;
+
     private string $digest;
+
     private string $digest1;
 
     public function __construct(

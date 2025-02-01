@@ -8,8 +8,8 @@ use Codehub\Gpwebpay\Services\FileKeyLoader;
 use Codehub\Gpwebpay\Services\Signer;
 
 beforeEach(function () {
-    $this->privateKeyPath = __DIR__ . '/keys/test_key.pem';
-    $this->publicKeyPath = __DIR__ . '/keys/test_cert.pem';
+    $this->privateKeyPath = __DIR__.'/keys/test_key.pem';
+    $this->publicKeyPath = __DIR__.'/keys/test_cert.pem';
     $this->keyPassword = 'changeit';
 
     $this->keyLoader = new FileKeyLoader($this->privateKeyPath, $this->keyPassword, $this->publicKeyPath);
