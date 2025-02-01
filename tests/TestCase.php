@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Codehub\Gpwebpay\Tests;
 
+use Codehub\Gpwebpay\GpwebpayServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Codehub\Gpwebpay\GpwebpayServiceProvider;
 
 class TestCase extends Orchestra
 {

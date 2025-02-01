@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Codehub\Gpwebpay;
 
+use Codehub\Gpwebpay\Commands\GpwebpayCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Codehub\Gpwebpay\Commands\GpwebpayCommand;
 
 class GpwebpayServiceProvider extends PackageServiceProvider
 {
