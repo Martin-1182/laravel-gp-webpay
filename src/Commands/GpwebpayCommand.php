@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class GpwebpayCommand extends Command
 {
-    public $signature = 'gp-webpay-sdk';
+    public $signature = 'webpay';
 
     public $description = 'My command';
 
