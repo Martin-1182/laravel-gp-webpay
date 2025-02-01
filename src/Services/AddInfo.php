@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Services;
+namespace Websystem\Gpwebpay\Services;
 
-use Codehub\Gpwebpay\Services\Exceptions\AddInfoException;
+use Websystem\Gpwebpay\Services\Exceptions\AddInfoException;
 use DOMDocument;
 use Spatie\ArrayToXml\ArrayToXml;
 

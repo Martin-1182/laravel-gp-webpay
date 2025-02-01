@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay;
+namespace Websystem\Gpwebpay;
 
-use Codehub\Gpwebpay\Services\Api;
-use Codehub\Gpwebpay\Services\Contracts\KeyLoaderInterface;
-use Codehub\Gpwebpay\Services\Exceptions\SignerException;
-use Codehub\Gpwebpay\Services\PaymentRequest;
-use Codehub\Gpwebpay\Services\Signer;
+use Websystem\Gpwebpay\Services\Api;
+use Websystem\Gpwebpay\Services\Contracts\KeyLoaderInterface;
+use Websystem\Gpwebpay\Services\Exceptions\SignerException;
+use Websystem\Gpwebpay\Services\PaymentRequest;
+use Websystem\Gpwebpay\Services\Signer;
 use InvalidArgumentException;
 
 class Gpwebpay

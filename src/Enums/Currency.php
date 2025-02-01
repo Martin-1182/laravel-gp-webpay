@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Enums;
+namespace Websystem\Gpwebpay\Enums;
 
 enum Currency: int
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Codehub\Gpwebpay\Services\Contracts\KeyLoaderInterface;
-use Codehub\Gpwebpay\Services\Exceptions\SignerException;
-use Codehub\Gpwebpay\Services\FileKeyLoader;
-use Codehub\Gpwebpay\Services\Signer;
+use Websystem\Gpwebpay\Services\Contracts\KeyLoaderInterface;
+use Websystem\Gpwebpay\Services\Exceptions\SignerException;
+use Websystem\Gpwebpay\Services\FileKeyLoader;
+use Websystem\Gpwebpay\Services\Signer;
 
 beforeEach(function () {
     $this->privateKeyPath = __DIR__.'/keys/test_key.pem';

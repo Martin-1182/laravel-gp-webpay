@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay;
+namespace Websystem\Gpwebpay;
 
-use Codehub\Gpwebpay\Commands\GpwebpayCommand;
-use Codehub\Gpwebpay\Services\FileKeyLoader;
+use Websystem\Gpwebpay\Commands\GpwebpayCommand;
+use Websystem\Gpwebpay\Services\FileKeyLoader;
 use RuntimeException;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

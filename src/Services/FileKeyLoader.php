@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Services;
+namespace Websystem\Gpwebpay\Services;
 
-use Codehub\Gpwebpay\Services\Contracts\KeyLoaderInterface;
-use Codehub\Gpwebpay\Services\Exceptions\SignerException;
+use Websystem\Gpwebpay\Services\Contracts\KeyLoaderInterface;
+use Websystem\Gpwebpay\Services\Exceptions\SignerException;
 use OpenSSLAsymmetricKey;
 
 class FileKeyLoader implements KeyLoaderInterface

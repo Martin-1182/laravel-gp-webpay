@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Services\Contracts;
+namespace Websystem\Gpwebpay\Services\Contracts;
 
 use OpenSSLAsymmetricKey;
 

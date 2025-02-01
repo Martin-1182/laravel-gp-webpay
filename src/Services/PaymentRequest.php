@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Services;
+namespace Websystem\Gpwebpay\Services;
 
-use Codehub\Gpwebpay\Enums\Currency;
-use Codehub\Gpwebpay\Enums\PaymentMethod;
+use Websystem\Gpwebpay\Enums\Currency;
+use Websystem\Gpwebpay\Enums\PaymentMethod;
 
 class PaymentRequest
 {

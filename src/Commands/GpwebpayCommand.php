@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Commands;
+namespace Websystem\Gpwebpay\Commands;
 
 use Illuminate\Console\Command;
 

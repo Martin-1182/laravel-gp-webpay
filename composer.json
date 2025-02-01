@@ -1,12 +1,12 @@
 {
-    "name": "codehub/gp-webpay-sdk",
+    "name": "websystem/gp-webpay-sdk",
     "description": "This is my package gp-webpay-sdk",
     "keywords": [
-        "Codehub",
+        "Websystem",
         "laravel",
         "gp-webpay-sdk"
     ],
-    "homepage": "https://github.com/codehub/gp-webpay-sdk",
+    "homepage": "https://github.com/websystem/gp-webpay-sdk",
     "license": "MIT",
     "authors": [
         {
@@ -38,13 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Codehub\\Gpwebpay\\": "src/",
-            "Codehub\\Gpwebpay\\Database\\Factories\\": "database/factories/"
+            "Websystem\\Gpwebpay\\": "src/",
+            "Websystem\\Gpwebpay\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Codehub\\Gpwebpay\\Tests\\": "tests/",
+            "Websystem\\Gpwebpay\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -66,10 +66,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Codehub\\Gpwebpay\\GpwebpayServiceProvider"
+                "Websystem\\Gpwebpay\\GpwebpayServiceProvider"
             ],
             "aliases": {
-                "Gpwebpay": "Codehub\\Gpwebpay\\Facades\\Gpwebpay"
+                "Gpwebpay": "Websystem\\Gpwebpay\\Facades\\Gpwebpay"
             }
         }
     },

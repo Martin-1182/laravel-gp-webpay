@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Codehub\Gpwebpay\Enums\Currency;
-use Codehub\Gpwebpay\Gpwebpay;
+use Websystem\Gpwebpay\Enums\Currency;
+use Websystem\Gpwebpay\Gpwebpay;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 

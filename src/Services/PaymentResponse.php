@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Services;
+namespace Websystem\Gpwebpay\Services;
 
 class PaymentResponse
 {

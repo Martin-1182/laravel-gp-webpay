@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Codehub\Gpwebpay\Tests;
+namespace Websystem\Gpwebpay\Tests;
 
-use Codehub\Gpwebpay\GpwebpayServiceProvider;
+use Websystem\Gpwebpay\GpwebpayServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Codehub\Gpwebpay\Enums\Currency;
-use Codehub\Gpwebpay\Enums\PaymentMethod;
-use Codehub\Gpwebpay\Services\PaymentRequest;
+use Websystem\Gpwebpay\Enums\Currency;
+use Websystem\Gpwebpay\Enums\PaymentMethod;
+use Websystem\Gpwebpay\Services\PaymentRequest;
 
 it('generates the correct parameters', function () {
     $expectedParams = [
