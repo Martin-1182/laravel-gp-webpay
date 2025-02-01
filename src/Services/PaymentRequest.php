@@ -38,7 +38,7 @@ class PaymentRequest
             'MERCHANTNUMBER' => '', // bude neskôr nastavené
             'OPERATION' => 'CREATE_ORDER',
             'ORDERNUMBER' => $this->orderNumber,
-            'AMOUNT' => (int)($this->amount * 100), // konverzia na centy
+            'AMOUNT' => (int) ($this->amount * 100), // konverzia na centy
             'CURRENCY' => $this->currency->value, // použitie hodnoty z enumu
             'DEPOSITFLAG' => $this->depositFlag,
             'URL' => $this->url,
@@ -99,7 +99,7 @@ class PaymentRequest
 
         return array_filter(
             $this->params,
-            fn (string $key) => !in_array($key, $filterOutParams, true),
+            fn (string $key) => ! in_array($key, $filterOutParams, true),
             ARRAY_FILTER_USE_KEY
         );
     }
