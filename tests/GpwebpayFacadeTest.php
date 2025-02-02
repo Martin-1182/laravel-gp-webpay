@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Websystem\Gpwebpay\Enums\Currency;
-use Websystem\Gpwebpay\Gpwebpay;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Websystem\Gpwebpay\Enums\Currency;
+use Websystem\Gpwebpay\Gpwebpay;
 
 it('registers Gpwebpay singleton via service provider', function () {
     Config::set('webpay.private_key_path', __DIR__.'/keys/test_key.pem');

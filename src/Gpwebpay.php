@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Websystem\Gpwebpay;
 
+use InvalidArgumentException;
 use Websystem\Gpwebpay\Services\Api;
 use Websystem\Gpwebpay\Services\Contracts\KeyLoaderInterface;
 use Websystem\Gpwebpay\Services\Exceptions\SignerException;
 use Websystem\Gpwebpay\Services\PaymentRequest;
 use Websystem\Gpwebpay\Services\Signer;
-use InvalidArgumentException;
 
 class Gpwebpay
 {

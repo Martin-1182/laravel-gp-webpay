@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Websystem\Gpwebpay;
 
-use Websystem\Gpwebpay\Commands\GpwebpayCommand;
-use Websystem\Gpwebpay\Services\FileKeyLoader;
 use RuntimeException;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Websystem\Gpwebpay\Commands\GpwebpayCommand;
+use Websystem\Gpwebpay\Services\FileKeyLoader;
 
 class GpwebpayServiceProvider extends PackageServiceProvider
 {
