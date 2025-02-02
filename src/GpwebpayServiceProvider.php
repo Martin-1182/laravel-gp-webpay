@@ -30,10 +30,10 @@ class GpwebpayServiceProvider extends PackageServiceProvider
             $merchantNumber = config('webpay.merchant_number');
             $webpayUrl = config('webpay.url');
 
-            $this->assertKeyFileExistsAndIsReadable($privateKeyPath, 'private');
-            $this->assertKeyFileExistsAndIsReadable($publicKeyPath, 'public');
+            $this->assertKeyFileExistsAndIsReadable(storage_path($privateKeyPath), 'private');
+            $this->assertKeyFileExistsAndIsReadable(storage_path($publicKeyPath), 'public');
 
-            $keyLoader = new FileKeyLoader($privateKeyPath, $privateKeyPassword, $publicKeyPath);
+            $keyLoader = new FileKeyLoader(storage_path($privateKeyPath), $privateKeyPassword, storage_path($publicKeyPath));
 
             return new Gpwebpay($keyLoader, $merchantNumber, $webpayUrl);
         });
