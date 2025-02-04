@@ -40,7 +40,6 @@ class Gpwebpay
         // Prepare additional info
         $addInfo = $this->createAddInfo($schema, $minimalValues, $paymentData['addInfo']);
 
-
         $paymentRequest = new PaymentRequest(
             $paymentData['orderNumber'],
             $paymentData['amount'],
