@@ -106,12 +106,12 @@ class Gpwebpay
             $response = new PaymentResponse(
                 $responseParams['OPERATION'],
                 $responseParams['ORDERNUMBER'],
-                $responseParams['MERORDERNUM'] ?? null,
                 (int) $responseParams['PRCODE'],
                 (int) $responseParams['SRCODE'],
-                $responseParams['RESULTTEXT'] ?? null,
                 $responseParams['DIGEST'],
                 $responseParams['DIGEST1'],
+                $responseParams['MERORDERNUM'] ?? null,
+                $responseParams['RESULTTEXT'] ?? null,
                 $responseParams['MD'] ?? null
             );
 
