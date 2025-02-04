@@ -9,7 +9,7 @@ use Websystem\Gpwebpay\Enums\PaymentMethod;
 
 class PaymentRequest
 {
-    private array $params;
+    private array $params = [];
 
     public function __construct(
         private readonly int $orderNumber,
@@ -36,14 +36,42 @@ class PaymentRequest
         ];
     }
 
-    public function setDigest(string $digest): void
+    public function setDigest(string $digest): static
     {
         $this->params['DIGEST'] = $digest;
+
+        return $this;
     }
 
-    public function setMerchantNumber(string $merchantNumber): void
+    public function getSignParams(): array
+    {
+        return array_filter($this->params, fn (string $key) => $key !== 'LANG', ARRAY_FILTER_USE_KEY);
+    }
+
+    public function setMerchantNumber(string $merchantNumber): static
     {
         $this->params['MERCHANTNUMBER'] = $merchantNumber;
+
+        return $this;
+    }
+
+    public function setDescription($value): static
+    {
+        $this->params['DESCRIPTION'] = $value;
+
+        return $this;
+    }
+
+    public function setParam($key, $value): static
+    {
+        $this->params[$key] = $value;
+
+        return $this;
+    }
+
+    public function getParams(): array
+    {
+        return $this->params;
     }
 
     public function toArray(): array

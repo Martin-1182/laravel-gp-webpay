@@ -6,12 +6,12 @@ namespace Websystem\Gpwebpay\Services;
 
 use Websystem\Gpwebpay\Services\Exceptions\SignerException;
 
-class Api
+readonly class Api
 {
     public function __construct(
-        private readonly string $merchantNumber,
-        private readonly string $webPayUrl,
-        private readonly Signer $signer
+        private string $merchantNumber,
+        private string $webPayUrl,
+        private Signer $signer
     ) {}
 
     /**
