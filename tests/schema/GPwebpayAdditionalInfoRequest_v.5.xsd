@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://gpe.cz/gpwebpay/additionalInfo/request"
-    targetNamespace="http://gpe.cz/gpwebpay/additionalInfo/request"
-    elementFormDefault="qualified"
-    version="1.0"
->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://gpe.cz/gpwebpay/additionalInfo/request" targetNamespace="http://gpe.cz/gpwebpay/additionalInfo/request" elementFormDefault="qualified" version="1.0">
     <xs:element name="additionalInfoRequest" type="additionalInfoRequest"/>
     <xs:complexType name="additionalInfoRequest">
         <xs:sequence>
             <xs:element name="cardholderInfo" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="cardholderDetails">
+                        <xs:element name="cardholderDetails" minOccurs="0">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="name" type="nameValue"/>
+                                    <xs:element name="name" type="cardholderNameValue" minOccurs="0"/>
                                     <!-- Cardholder/ user login ID which was used to access web store in case of access through Social Network (e.g. Facebook, Google…) -->
                                     <xs:element name="loginId" type="textValue" minOccurs="0"/>
                                     <!-- Mechanism used by the Cardholder to authenticate to the e-shop. -->
@@ -52,11 +46,9 @@
                                         02 = Less than 30 days
                                         03 = 30−60 days
                                         04 = More than 60 days -->
-                                    <xs:element name="userAccountLastChangeAge" type="userAccountLastChangeAgeValue"
-                                                minOccurs="0"/>
+                                    <xs:element name="userAccountLastChangeAge" type="userAccountLastChangeAgeValue" minOccurs="0"/>
                                     <!-- Date that cardholder’s account with the e-shop had a password change or account reset. Date format = YYYYMMDD -->
-                                    <xs:element name="userAccountPasswordChangeDate" type="dateTypeValue"
-                                                minOccurs="0"/>
+                                    <xs:element name="userAccountPasswordChangeDate" type="dateTypeValue" minOccurs="0"/>
                                     <!-- Indicates the length of time since the cardholder’s account with the e-shop had a password change or account reset. -->
                                     <!-- Values accepted:
                                         01 = No change
@@ -64,16 +56,21 @@
                                         03 = Less than 30 days
                                         04 = 30−60 days
                                         05 = More than 60 days -->
-                                    <xs:element name="userAccountPasswordChangeAge"
-                                                type="userAccountPasswordChangeAgeValue" minOccurs="0"/>
+                                    <xs:element name="userAccountPasswordChangeAge" type="userAccountPasswordChangeAgeValue" minOccurs="0"/>
                                     <xs:element name="socialNetworkId" type="textValue" minOccurs="0"/>
-                                    <xs:element name="email" type="emailValue"/>
-                                    <xs:element name="phoneCountry" type="phoneCountryValue" minOccurs="0"/>
-                                    <xs:element name="phone" type="phoneValue" minOccurs="0"/>
-                                    <xs:element name="mobilePhoneCountry" type="phoneCountryValue" minOccurs="0"/>
-                                    <xs:element name="mobilePhone" type="phoneValue" minOccurs="0"/>
-                                    <xs:element name="workPhoneCountry" type="phoneCountryValue" minOccurs="0"/>
-                                    <xs:element name="workPhone" type="phoneValue" minOccurs="0"/>
+                                    <xs:element name="email" type="emailValue" minOccurs="0"/>
+                                    <xs:sequence minOccurs="0" maxOccurs="1">
+                                        <xs:element name="phoneCountry" type="phoneCountryValue"/>
+                                        <xs:element name="phone" type="phoneValue"/>
+                                    </xs:sequence>
+                                    <xs:sequence minOccurs="0" maxOccurs="1">
+                                        <xs:element name="mobilePhoneCountry" type="phoneCountryValue"/>
+                                        <xs:element name="mobilePhone" type="phoneValue"/>
+                                    </xs:sequence>
+                                    <xs:sequence minOccurs="0" maxOccurs="1">
+                                        <xs:element name="workPhoneCountry" type="phoneCountryValue"/>
+                                        <xs:element name="workPhone" type="phoneValue"/>
+                                    </xs:sequence>
                                     <xs:element name="clientIpAddress" type="ipValue" minOccurs="0"/>
                                 </xs:sequence>
                             </xs:complexType>
@@ -222,8 +219,7 @@
                     <xs:sequence>
                         <xs:element name="requestShippingDetails" type="xs:boolean" minOccurs="0"/>
                         <xs:element name="requestLoyaltyProgram" type="xs:boolean" minOccurs="0"/>
-                        <xs:element name="shippingLocationRestriction" type="shippingLocationRestrictionValue"
-                                    minOccurs="0"/>
+                        <xs:element name="shippingLocationRestriction" type="shippingLocationRestrictionValue" minOccurs="0"/>
                         <xs:element name="requestDeferredAuthorization" type="xs:boolean" minOccurs="0"/>
                         <xs:element name="requestCardsDetails" type="xs:boolean" minOccurs="0"/>
                     </xs:sequence>
@@ -305,10 +301,11 @@
             <xs:maxLength value="255"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="nameValue">
+    <xs:simpleType name="cardholderNameValue">
         <xs:restriction base="xs:string">
             <xs:minLength value="2"/>
             <xs:maxLength value="45"/>
+            <xs:pattern value="[&#x21;-&#x7E;]+[&#x20;-&#x7E;]*"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="addressValue">
@@ -324,11 +321,12 @@
     <xs:simpleType name="postalCodeValue">
         <xs:restriction base="xs:string">
             <xs:maxLength value="16"/>
+            <xs:pattern value="[\S].*[\S]"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="countryValue">
         <xs:restriction base="xs:string">
-            <xs:pattern value="\d{1,3}"/>
+            <xs:pattern value="\d{3}"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="countrySubdivisionValue">
@@ -351,8 +349,7 @@
         <xs:restriction base="xs:string">
             <xs:minLength value="6"/>
             <xs:maxLength value="255"/>
-            <xs:pattern
-                value="([0-9a-zA-Z]([-_+.\w]*[0-9a-zA-Z_-])*@([0-9a-zA-Z][-_+\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})"/>
+            <xs:pattern value="([0-9a-zA-Z]([-_\+.\w]*[0-9a-zA-Z_-])*@([0-9a-zA-Z]*[-_\+\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,20})"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="ipV4">
@@ -366,8 +363,7 @@
         <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
             <xs:maxLength value="255"/>
-            <xs:pattern
-                value="([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.{3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])"/>
+            <xs:pattern value="([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.{3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="ipValue">
@@ -393,7 +389,7 @@
     </xs:simpleType>
     <xs:simpleType name="merchantValueType">
         <xs:restriction base="xs:string">
-            <xs:pattern value="[&#x20;-&#x7E;]*"/>
+            <xs:pattern value="[&#x21;-&#x7E;]+[&#x20;-&#x7E;]*"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="merchantIdValue">
@@ -430,7 +426,7 @@
         <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
             <xs:maxLength value="10"/>
-            <xs:pattern value="[a-zA-Z0-9 ]+"/>
+            <xs:pattern value="[\S].*[\S]"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="merchantStateValue">
@@ -498,8 +494,7 @@
     <xs:simpleType name="loginTimeValue">
         <xs:restriction base="xs:string">
             <xs:length value="12"/>
-            <xs:pattern
-                value="([1-2]\d{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(0[0-9]|1[0-9]|2[0-3])(0[0-9]|[1-5][0-9])"/>
+            <xs:pattern value="([1-2]\d{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(0[0-9]|1[0-9]|2[0-3])(0[0-9]|[1-5][0-9])"/>
             <!--pattern "YYYYMMDDhhmm"/-->
         </xs:restriction>
     </xs:simpleType>
