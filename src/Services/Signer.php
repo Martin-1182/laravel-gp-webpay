@@ -7,10 +7,10 @@ namespace Websystem\Gpwebpay\Services;
 use Websystem\Gpwebpay\Services\Contracts\KeyLoaderInterface;
 use Websystem\Gpwebpay\Services\Exceptions\SignerException;
 
-class Signer
+readonly class Signer
 {
     public function __construct(
-        private readonly KeyLoaderInterface $keyLoader
+        private KeyLoaderInterface $keyLoader
     ) {}
 
     /**
