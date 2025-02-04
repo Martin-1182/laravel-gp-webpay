@@ -9,7 +9,7 @@ use Websystem\Gpwebpay\Enums\PaymentMethod;
 
 class PaymentRequest
 {
-    private array $params = [];
+    private array $params;
 
     public function __construct(
         private readonly int $orderNumber,
