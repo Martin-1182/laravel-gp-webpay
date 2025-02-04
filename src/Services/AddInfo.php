@@ -43,4 +43,13 @@ class AddInfo
             ]
         ));
     }
+
+    public static function createMinimalValues(string $version = '5.0'): array
+    {
+        return [
+            '_attributes' => [
+                'version' => $version,
+            ],
+        ];
+    }
 }

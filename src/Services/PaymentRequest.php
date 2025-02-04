@@ -17,7 +17,9 @@ class PaymentRequest
         private readonly Currency $currency,
         private readonly int $depositFlag,
         private readonly string $url,
-        private readonly PaymentMethod $paymentMethod = PaymentMethod::PAYMENT_CARD
+        private readonly AddInfo $addInfo,
+        private readonly PaymentMethod $paymentMethod = PaymentMethod::PAYMENT_CARD,
+
     ) {
         $this->params = $this->initializeBaseParams();
     }
@@ -32,6 +34,7 @@ class PaymentRequest
             'CURRENCY' => $this->currency->value,
             'DEPOSITFLAG' => $this->depositFlag,
             'URL' => $this->url,
+            'ADDINFO' => $this->addInfo->toXml(),
             'PAYMETHOD' => $this->paymentMethod->value,
         ];
     }
