@@ -15,20 +15,20 @@ class PaymentResponse
     public function __construct(
         string $operation,
         string $orderNumber,
-        ?string $merOrderNumber,
         int $prCode,
         int $srCode,
-        ?string $resultText,
         string $digest,
         string $digest1,
-        ?string $md
+        ?string $merOrderNumber = null,
+        ?string $resultText = null,
+        ?string $md = null
     ) {
-        $this->params = $this->initializeParams(
+        $this->params = $this->buildParams(
             $operation,
             $orderNumber,
-            $merOrderNumber,
             $prCode,
             $srCode,
+            $merOrderNumber,
             $resultText,
             $md
         );
@@ -36,14 +36,14 @@ class PaymentResponse
         $this->digest1 = $digest1;
     }
 
-    private function initializeParams(
+    private function buildParams(
         string $operation,
         string $orderNumber,
-        ?string $merOrderNumber,
         int $prCode,
         int $srCode,
-        ?string $resultText,
-        ?string $md
+        ?string $merOrderNumber = null,
+        ?string $resultText = null,
+        ?string $md = null
     ): array {
         $params = [
             'operation' => $operation,
@@ -52,16 +52,16 @@ class PaymentResponse
             'srcode' => $srCode,
         ];
 
-        if ($merOrderNumber) {
+        if ($merOrderNumber !== null) {
             $params['merordernum'] = $merOrderNumber;
         }
 
-        if ($md) {
-            $params['md'] = $md;
+        if ($resultText !== null) {
+            $params['resulttext'] = $resultText;
         }
 
-        if ($resultText) {
-            $params['resulttext'] = $resultText;
+        if ($md !== null) {
+            $params['md'] = $md;
         }
 
         return $params;
