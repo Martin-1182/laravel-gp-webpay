@@ -24,7 +24,6 @@ This package provides a simple way to integrate GPWebpay payment gateway into La
 Save the following environment variables to the `.env` file in the root directory of the project.
  Locate your keys and certificates in the `storage` directory.
 
-
 ```php
 GPWEBPAY_PRIVATE_KEY_PATH= # Storage path to the private key
 GPWEBPAY_PRIVATE_KEY_PASSWORD= # Password for the private key
@@ -33,7 +32,6 @@ GPWEBPAY_MERCHANT_NUMBER= # Merchant number
 GPWEBPAY_URL=https://test.3dsecure.gpwebpay.com/pgw/order.do
 GPWEBPAY_ADD_INFO_SCHEMA= # Storage path to the additional info schema
 ```
-
 ### Available methods
 
 #### Create payment
