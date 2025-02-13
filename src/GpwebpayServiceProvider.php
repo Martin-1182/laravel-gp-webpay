@@ -38,12 +38,12 @@ class GpwebpayServiceProvider extends PackageServiceProvider
 
     private function assertKeyFileExistsAndIsReadable(string $filePath, string $type): void
     {
-        if (!file_exists($filePath)) {
-            throw new RuntimeException(ucfirst($type) . " key file {$filePath} does not exist!");
+        if (! file_exists($filePath)) {
+            throw new RuntimeException(ucfirst($type)." key file {$filePath} does not exist!");
         }
 
-        if (!is_readable($filePath)) {
-            throw new RuntimeException(ucfirst($type) . " key file {$filePath} is not readable!");
+        if (! is_readable($filePath)) {
+            throw new RuntimeException(ucfirst($type)." key file {$filePath} is not readable!");
         }
     }
 }
