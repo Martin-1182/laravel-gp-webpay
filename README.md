@@ -36,6 +36,9 @@ GPWEBPAY_ADD_INFO_SCHEMA= # Storage path to the additional info schema
 
 #### Create payment
 ```php
+use Websystem\Gpwebpay\Enums\Currency;
+use Websystem\Gpwebpay\Facades\Gpwebpay;
+
 $paymentData = [
     'orderNumber' => 1001, # Unique order number
     'amount' => 150.50, # Float value
