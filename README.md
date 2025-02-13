@@ -55,5 +55,5 @@ $paymentData = [
 ```
 ## Credits
 
-This library originates from [granam/gpwebpay](https://github.com/granam/gpwebpay).
+This library originates from [adamstipak/webpay-php](https://github.com/newPOPE/gp-webpay-php-sdk).
 I have adapted it into a package for Laravel and made slight code modifications.
