@@ -28,7 +28,7 @@ class Gpwebpay
     /**
      * @throws SignerException
      */
-    public function createPaymentRequestUrl($paymentData): string
+    public function createPaymentRequestUrl(array $paymentData): string
     {
         // Validate required payment data
         $this->validatePaymentData($paymentData);
@@ -118,7 +118,7 @@ class Gpwebpay
 
             return true;
         } catch (Throwable $th) {
-            Log::error('WebpayService. Error! Can not verifying payment response: '.$th->getMessage());
+            Log::error('Error! Can not verifying payment response: '.$th->getMessage());
 
             return false;
         }
