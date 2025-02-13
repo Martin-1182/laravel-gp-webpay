@@ -53,3 +53,7 @@ $paymentData = [
 
     return redirect($requestUrl);
 ```
+## Credits
+
+This library originates from [granam/gpwebpay](https://github.com/granam/gpwebpay).
+I have adapted it into a package for Laravel and made slight code modifications.
