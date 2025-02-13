@@ -34,7 +34,7 @@ class Gpwebpay
         $this->validatePaymentData($paymentData);
 
         // Load XML schema for AddInfo
-        $schema = file_get_contents($paymentData['addInfoSchemaPath']);
+        $schema = file_get_contents(storage_path($paymentData['addInfoSchemaPath']));
         $minimalValues = AddInfo::createMinimalValues();
 
         // Prepare additional info
